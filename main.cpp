@@ -1,17 +1,20 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <string>
 #include <cmath>
+#include <algorithm>
 using namespace std;
 
+string choice[5] = { "í™˜íƒ€", "ì‚¬ì´ë‹¤", "ì½œë¼", "íŒŒì›Œì—ì´ë“œ", "ì†Œì£¼" };
+vector<pair<string, int>> mix;
+
 int main_menu() {
-	cout << "¾È³çÇÏ¼¼¿ä\n";
-	cout << "1 : Á÷Á¢ ¸¸µå´Â Á¶ÇÕ\n";
-	cout << "2 : ÀÎ±â ¼øÀ§\n";
-	cout << "3 : ÀÌ·± Á¶ÇÕÀº ¾î¶°¼¼¿ä?\n";
-	cout << "4 : Á¾·áÇÏ±â\n";
-	cout << "\n";
+	std::cout << "ì•ˆë…•í•˜ì„¸ìš”\n";
+	std::cout << "1 : ì§ì ‘ ë§Œë“œëŠ” ì¡°í•©\n";
+	std::cout << "2 : ì¸ê¸° ìˆœìœ„\n";
+	std::cout << "3 : ì´ëŸ° ì¡°í•©ì€ ì–´ë– ì„¸ìš”?\n";
+	std::cout << "4 : ì¢…ë£Œí•˜ê¸°\n";
+	std::cout << "\n";
 
 	int ret;
 	cin >> ret;
@@ -19,20 +22,64 @@ int main_menu() {
 	return ret;
 }
 
-bool cmp(pair<int, int> a, pair<int, int> b) {
+void first_menu() {
+	string recipe_now = "";
+	int bev;
+	int ml;
+
+	while (1) {
+		std::cout << "ì–´ë–¤ ìŒë£Œë¥¼ ë“œì‹œê² ìŠµë‹ˆê¹Œ?" << endl;
+		std::cout << "1. í™˜íƒ€ 2. ì‚¬ì´ë‹¤ 3. ì½œë¼ 4. íŒŒì›Œì—ì´ë“œ 5. ì†Œì£¼" << endl;
+		std::cout << "(*)ì„ ëˆ„ë¥´ë©´ ì¢…ë£Œë©ë‹ˆë‹¤." << endl;
+		cin >> bev;
+
+		if (bev == int('*')) {
+			std::cout << "ìŒë£Œì„ íƒì„ ì¢…ë£Œí•˜ê² ìŠµë‹ˆë‹¤" << endl;
+			break;
+		}
+
+		recipe_now += choice[bev] + " ";
+
+		std::cout << choice[bev] << "ë¥¼ ì–¼ë§Œí¼ ë”°ë¥´ì‹œê² ìŠµë‹ˆê¹Œ?" << endl;
+		cin >> ml;
+		std::cout << "*******" << ml << "ë§Œí¼ ë”°ë¥´ê³  ìˆìŠµë‹ˆë‹¤!" << "*******" << endl;
+		recipe_now += to_string(ml) + " ";
+	}
+
+	std::cout << "------------ìµœì¢…ë ˆì‹œí”¼-------------" << endl;
+	cout << recipe_now << endl;
+
+	int rate = recomm_rate();
+	mix.push_back(make_pair(recipe_now, rate));
+}
+
+int recomm_rate() {
+	std::cout << "ë§›ìˆê²Œ ë“œì…¨ë‚˜ìš”?" << endl;
+	std::cout << "ì²´í—˜í•´ë³¸ ì¡°í•©ì— ëŒ€í•´ ì´ì•¼ê¸°í•´ì£¼ì„¸ìš”." << endl;
+
+	std::cout << "**************************************" << endl;
+	std::cout << "ì ìˆ˜ëŠ” 0ì ë¶€í„° 9ì ê¹Œì§€ ì¤„ ìˆ˜ ìˆìŠµë‹ˆë‹¤!" << endl;
+
+	int score;
+	std::cin >> score;
+
+	return score;
+}
+
+bool cmp(pair<string, int> a, pair<string, int> b) {
 	return a.second > b.second;
 }
 
 void pour_juice(string str) {
 	string temp;
-	bool check_type = 1;	// 1ÀÌ¸é À½·á¼ö, 0ÀÌ¸é ml·Î ÇÏÀÚ
+	bool check_type = 1;	// 1ì´ë©´ ìŒë£Œìˆ˜, 0ì´ë©´ mlë¡œ í•˜ì
 	for (int i = 0; i < str.length(); i++) {
 		if (str[i] == ' ') {
 			if (check_type == 1) {
-				// À½·á¼ö ¼±ÅÃÇÏ±â
+				// ìŒë£Œìˆ˜ ì„ íƒí•˜ê¸°
 			}
 			else {
-				// ±× ml¸¸Å­ ºÎ¾î
+				// ê·¸ mlë§Œí¼ ë¶€ì–´
 				int ml = 0;
 				
 				int unit = temp.length();
@@ -41,7 +88,7 @@ void pour_juice(string str) {
 					unit--;
 				}
 			}
-			check_type = !check_type;	// type º¯È¯
+			check_type = !check_type;	// type ë³€í™˜
 		}
 		else {
 			temp += str[i];
@@ -53,49 +100,29 @@ int main() {
 
 	int menu = main_menu();
 
-	vector<string> mix;	// ¿©±â¿¡ Á¶ÇÕ ÀúÀåÇØµÑ°ÅÀÓ
-
-	vector<pair<int, int>> v;	// <Á¶ÇÕÀÇ index, ÁÖ¹® È½¼ö>
-	for (int i = 0; i < 10; i++) {
-		v.push_back(make_pair(i, i % 5));
-	}
-
-	for (int i = 0; i < 10; i++) {
-		string tmp;
-		if (i <= 5)
-			tmp = "¾È³çÇÏ¼¼¿ä";
-		else
-			tmp = "Àß°¡»ï¤»";
-
-		mix.push_back(tmp);
-	}
-
-	/*
-
-	for (int i = 0; i < mix.size(); i++)
-		cout << mix[i] << endl;
-
-	*/
+	first_menu();	// ì²« ë²ˆì§¸ ë©”ë‰´ ì§„ì…
 
 	cout << endl;
 
 	if (menu == 2) {
-		sort(v.begin(), v.end(), cmp);
+		sort(mix.begin(), mix.end(), cmp);
 
-		cout << "ÀÌ·± Á¶ÇÕÀÌ ÀÖ¾î¿ä\n\n";
+		cout << "ì´ëŸ° ì¡°í•©ì´ ìˆì–´ìš”\n\n";
 
-		for (int i = 0; i < v.size(); i++)
+		/*
+		for (int i = 0; i < mix.size(); i++)
 			cout << i << "  ||  " << mix[v[i].first] << "\n";
 
-		cout << "¿øÇÏ´Â Á¶ÇÕÀ» ¼±ÅÃÇØÁÖ¼¼¿ä\n";
+		cout << "ì›í•˜ëŠ” ì¡°í•©ì„ ì„ íƒí•´ì£¼ì„¸ìš”\n";
 
 		int choice;
 		cin >> choice;
 
-		cout << "\n" << mix[choice] << " Á¶ÇÕÀ» ¼±ÅÃÇÏ¿´½À´Ï´Ù.\n";
-		cout << "Á¦Á¶ ½ÃÀÛÇÕ´Ï´Ù...\n";
+		cout << "\n" << mix[choice] << " ì¡°í•©ì„ ì„ íƒí•˜ì˜€ìŠµë‹ˆë‹¤.\n";
+		cout << "ì œì¡° ì‹œì‘í•©ë‹ˆë‹¤...\n";
+		*/
 
-		//¿©±â¼­ºÎÅÍ ÀÌÁ¦ º×±â ½ÃÀÛÇÔ
+		//ì—¬ê¸°ì„œë¶€í„° ì´ì œ ë¶“ê¸° ì‹œì‘í•¨
 	}
 
 
