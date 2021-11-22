@@ -73,7 +73,7 @@ void first_menu() {
 
 		recipe_now += choice[bev-1] + " ";
 
-		Seiral.println(choice[bev-1] + (String)"를 얼만큼 따르시겠습니까?\n"); //std::cout << choice[bev-1] << "를 얼만큼 따르시겠습니까?" << endl << endl;
+		Serial.println(choice[bev-1] + (String)"를 얼만큼 따르시겠습니까?\n"); //std::cout << choice[bev-1] << "를 얼만큼 따르시겠습니까?" << endl << endl;
 		Serial.println("원하는 만큼 mL 단위로 입력해주세요! : ");
 		ml = (int)keypad.getKey();
 		Serial.println("\n**************************************\n");
