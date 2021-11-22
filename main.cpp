@@ -73,7 +73,7 @@ void first_menu() {
 
 		recipe_now += choice[bev-1] + " ";
 
-		std::cout << choice[bev-1] << "를 얼만큼 따르시겠습니까?" << endl << endl;
+		Seiral.println(choice[bev-1] + (String)"를 얼만큼 따르시겠습니까?\n"); //std::cout << choice[bev-1] << "를 얼만큼 따르시겠습니까?" << endl << endl;
 		Serial.println("원하는 만큼 mL 단위로 입력해주세요! : ");
 		ml = (int)keypad.getKey();
 		Serial.println("\n**************************************\n");
@@ -81,8 +81,8 @@ void first_menu() {
 	}
 
 	Serial.println("------------최종레시피-------------\n");
-	cout << recipe_now << endl << endl;
-	Serial.println("-----------------------------------\n");
+	Serial.println(recipe_now)  //cout << recipe_now << endl << endl;
+	Serial.println("\n-----------------------------------\n");
 
 	//pour_juice(recipe_now); 여기서부터 붓기 시작함
 
@@ -102,7 +102,7 @@ void second_menu() {
 	Serial.println("이런 조합이 있어요\n\n");
 
 	for (int i = 0; i < mix.size(); i++)
-		std::cout << i+1 << "  |  " << mix[i].first << "\n\n";
+		println(i+1 + (String)"  |  " + mix[i].first + "\n"); //std::cout << i+1 << "  |  " << mix[i].first << "\n\n";
 
 	Serial.println("원하는 조합을 선택해주세요\n\n");
 
@@ -110,7 +110,7 @@ void second_menu() {
 	Serial.println("당신의 조합은? : ");
 	choice = (int)keypad.getKey();
 
-	std::cout << "\n" << mix[choice-1].first << " 조합을 선택하였습니다.\n";
+	println("\n" + mix[choice-1].first + (String)" 조합을 선택하였습니다.\n"); //std::cout << "\n" << mix[choice-1].first << " 조합을 선택하였습니다.\n";
 	Serial.println("제조 시작합니다...\n\n");
 
 	//여기서부터 이제 붓기 시작함
@@ -122,12 +122,12 @@ void second_menu() {
 
 void third_menu() {
 	Serial.println("**************************************\n");
-	std::cout << "이런 <증명된> 조합도 있어요" << endl << endl;
+	Serial.println("이런 <증명된> 조합도 있어요\n");
 
 	string good_mix[3] = { "사이다 20 파워에이드 20 소주 40", "콜라 30 소주 50", "사이다 70 소주 10" };
 
 	for (int i = 0; i < 3; i++) {	// 절대치긴 한데... good_mix의 배열 크기
-		std::cout << i + 1 << "  |  " << good_mix[i] << endl << endl;
+		Serial.println(i+1 + (String)"  |  "+ good_mix[i] + "\n");//std::cout << i + 1 << "  |  " << good_mix[i] << endl << endl;
 	}
 
 	Serial.println("당신의 선택은? : ");
@@ -142,7 +142,7 @@ void third_menu() {
 
 void pour_juice(string str) {
 	Serial.println("**************************************\n");
-	std::cout << str << "의 조합을 만들고 있습니다......" << endl << endl;
+	Serial.println(str + (String)"의 조합을 만들고 있습니다.....\n"); //std::cout << str << "의 조합을 만들고 있습니다......" << endl << endl;
 	string temp;
 	bool check_type = 1;	// 1이면 음료수, 0이면 ml로 하자
 	for (int i = 0; i < str.length(); i++) {
