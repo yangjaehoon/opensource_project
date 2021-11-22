@@ -132,7 +132,7 @@ void third_menu() {
 
 	Serial.println("당신의 선택은? : ");
 	int choice;
-	choice = (int)keypad.getKey();
+	choice = keypad.getKey();
 
 	//여기서부터 이제 붓기 시작함
 	//pour_juice(good_mix[choice-1]);
