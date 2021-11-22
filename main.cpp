@@ -75,7 +75,7 @@ void first_menu() {
 
 		std::cout << choice[bev-1] << "를 얼만큼 따르시겠습니까?" << endl << endl;
 		Serial.println("원하는 만큼 mL 단위로 입력해주세요! : ");
-		cin >> ml;
+		ml = (int)keypad.getKey();
 		Serial.println("\n**************************************\n");
 		recipe_now += to_string(ml) + " ";
 	}
@@ -108,7 +108,7 @@ void second_menu() {
 
 	int choice;
 	Serial.println("당신의 조합은? : ");
-	std::cin >> choice;
+	choice = (int)keypad.getKey();
 
 	std::cout << "\n" << mix[choice-1].first << " 조합을 선택하였습니다.\n";
 	Serial.println("제조 시작합니다...\n\n");
@@ -132,7 +132,7 @@ void third_menu() {
 
 	Serial.println("당신의 선택은? : ");
 	int choice;
-	std::cin >> choice;
+	choice = (int)keypad.getKey();
 
 	//여기서부터 이제 붓기 시작함
 	//pour_juice(good_mix[choice-1]);
