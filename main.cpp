@@ -18,7 +18,7 @@ int main_menu() {
 
 	int ret;
 	Serial.println("당신의 선택은 : ");
-	cin >> ret;
+	ret = (int)keypad.getKey();
 
 	Serial.println("**************************************\n");
 
@@ -34,7 +34,7 @@ int recomm_rate() {
 
 	int score;
 	Serial.println("당신의 점수는 : ");
-	std::cin >> score;
+	score = (int)keypad.getKey();
 	Serial.println("점수 반영되었습니다.");
 
 	Serial.println("**************************************\n");
@@ -55,9 +55,9 @@ void first_menu() {
 		Serial.println("1. 환타 2. 사이다 3. 콜라 4. 파워에이드 5. 소주\n");
 		Serial.println("(*)을 누르면 종료됩니다.\n");
 		Serial.println("당신의 선택은 : ");
-		std::cin >> input;
+		input = keypad.getKey();
 
-		std::cout << endl;
+		Serial.println("");
 
 		if (input == '*') {
 			Serial.println("음료선택을 종료하겠습니다");
