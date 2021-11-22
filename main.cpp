@@ -194,7 +194,10 @@ int main() {
 			Serial.println("**************************************\n");
 			checkFinish = 1;
 			break;
+		default:
+			Serial.println("다시 입력해주세요.\n\n");
 		}
+		
 		
 		if (checkFinish == 1)
 			break;
