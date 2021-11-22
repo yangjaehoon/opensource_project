@@ -27,7 +27,7 @@ int main_menu() {
 
 int recomm_rate() {
 	Serial.println("**************************************\n");
-	Serial.println("맛있게 드셨나요?";
+	Serial.println("맛있게 드셨나요?");
 	Serial.println("체험해본 조합에 대해 이야기해주세요.\n");
 
 	Serial.println("점수는 0점부터 9점까지 줄 수 있습니다!\n");
