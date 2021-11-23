@@ -1,12 +1,29 @@
-#include <iostream>
+//https://m.blog.naver.com/dokkosam/221750933418
+#include <StandardCplusplus.h>
+#include <Keypad.h>
 #include <vector>
 #include <string>
 #include <cmath>
 #include <algorithm>
 using namespace std;
 
-string choice[5] = { "Fanta", "Sprite", "CocaCola", "Powerade", "Soju" };
-vector<pair<string, int>> mix;
+const byte ROWS = 4;
+const byte COLS = 4;
+
+char keys[ROWS][COLS] = {
+  {'1', '2', '3', 'A'},
+  {'4', '5', '6', 'B'},
+  {'7', '7', '9', 'C'},
+  {'*', '0', '#', 'D'}
+};
+
+byte rowPins[ROWS] = {9, 8, 7, 6};
+byte colPins[COLS] = {5, 4, 3, 2};
+
+Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+
+String choice[5] = { "Fanta", "Sprite", "CocaCola", "Powerade", "Soju" };
+vector<pair<String, int>> mix;
 
 char tmp;
 
@@ -54,7 +71,7 @@ int recomm_rate() {
 }
 
 void first_menu() {
-  string recipe_now = "";
+  String recipe_now = "";
   char input;
   int bev;
   char ml;
@@ -87,10 +104,12 @@ void first_menu() {
       continue;
     }
 
-    recipe_now += choice[bev-1] + " ";
+    recipe_now += (String)choice[bev-1] + " ";
 
-    Serial.println((String)"Amount to pour " + choice[bev-1] + (String)"(per 10mL) : "); //std::cout << choice[bev-1] << "를 얼만큼 따르시겠습니까?" << endl << endl;
-    
+      Serial.println(choice[bev - 1]); //std::cout << choice[bev-1] << "를 얼만큼 따르시겠습니까?" << endl << endl;
+      Serial.println("How much would you like to follow?\n");
+      Serial.println("Please enter as many mL units as you want! : ");
+      
     while(1){
       ml = keypad.getKey();
       if(ml)
@@ -98,11 +117,12 @@ void first_menu() {
     }
     
     Serial.println("\n**************************************\n");
-    recipe_now += ml + 0 + " ";
+    String tmpR = (String)ml + (String)"0 ";
+    recipe_now += tmpR;
   }
 
   Serial.println("------------Your Recipe-------------\n");
-  Serial.println(recipe_now)  //cout << recipe_now << endl << endl;
+  Serial.println(recipe_now);  //cout << recipe_now << endl << endl;
   Serial.println("\n----------------------------------\n");
 
   //pour_juice(recipe_now); 여기서부터 붓기 시작함
@@ -111,7 +131,7 @@ void first_menu() {
   mix.push_back(make_pair(recipe_now, rate));
 }
 
-bool cmp(pair<string, int> a, pair<string, int> b) {
+bool cmp(pair<String, int> a, pair<String, int> b) {
   return a.second > b.second;
 }
 
@@ -123,7 +143,7 @@ void second_menu() {
   Serial.println("Recommended Mix\n\n");
 
   for (int i = 0; i < mix.size(); i++)
-    println(i+1 + (String)"  |  " + mix[i].first + "\n"); //std::cout << i+1 << "  |  " << mix[i].first << "\n\n";
+    Serial.println(i+1 + (String)"  |  " + mix[i].first + "\n"); //std::cout << i+1 << "  |  " << mix[i].first << "\n\n";
 
   Serial.println("What's your choice? : ");
 
@@ -137,7 +157,7 @@ void second_menu() {
     }
   }
 
-  println("\n" + mix[choice-1].first + (String)" was your choice.\n"); //std::cout << "\n" << mix[choice-1].first << " 조합을 선택하였습니다.\n";
+  Serial.println("\n" + mix[choice-1].first + (String)" was your choice.\n"); //std::cout << "\n" << mix[choice-1].first << " 조합을 선택하였습니다.\n";
   Serial.println("Start Making...\n\n");
 
   //여기서부터 이제 붓기 시작함
@@ -151,7 +171,7 @@ void third_menu() {
   Serial.println("**************************************\n");
   Serial.println("How about these?\n");
 
-  string good_mix[3] = { "Sprite 20 Powerade 20 Soju 40", "CocaCola 30 Soju 50", "Sprite 70 Soju 10" };
+  String good_mix[3] = { "Sprite 20 Powerade 20 Soju 40", "CocaCola 30 Soju 50", "Sprite 70 Soju 10" };
 
   for (int i = 0; i < 3; i++) { // 절대치긴 한데... good_mix의 배열 크기
     Serial.println(i+1 + (String)"  |  "+ good_mix[i] + "\n");//std::cout << i + 1 << "  |  " << good_mix[i] << endl << endl;
@@ -174,10 +194,10 @@ void third_menu() {
   Serial.println("**************************************\n");
 }
 
-void pour_juice(string str) {
+void pour_juice(String str) {
   Serial.println("**************************************\n");
   Serial.println(str + (String)" is in progress.....\n"); //std::cout << str << "의 조합을 만들고 있습니다......" << endl << endl;
-  string temp;
+  String temp;
   bool check_type = 1;  // 1이면 음료수, 0이면 ml로 하자
   for (int i = 0; i < str.length(); i++) {
     if (str[i] == ' ') {
@@ -207,7 +227,7 @@ void pour_juice(string str) {
 
 void setup() {
   // put your setup code here, to run once:
-
+ Serial.begin(9600);
 }
 
 void loop() {
@@ -246,4 +266,5 @@ void loop() {
       exit(0);
   }   
 
+ }
 }
