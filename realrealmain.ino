@@ -47,13 +47,14 @@ char main_menu() {
   Serial.println("2 : Best Customization");
   Serial.println("3 : Get some Recommendation!");
   Serial.println("4 : Exit");
-  Serial.println("\nChoose the menu!");
+  Serial.print("\nChoose the menu : ");
   
   char ret;  
   while(1){
     ret = keypad.getKey();
     if(ret)
     {
+       Serial.println(ret);
        break;
     }
   }
@@ -162,26 +163,26 @@ void second_menu() {
 
   Serial.print("Your Choice : ");
 
-  int choice;
+  int input;
 
   while(1){
     tmp = keypad.getKey();
     if(tmp){
-      choice = int(tmp) - '0';
+      input = int(tmp) - '0';
       Serial.println(tmp);
       break;
     }
   }
   
-  Serial.println(choice);
+  Serial.println(input);
 
-  Serial.println("\n" + mix[choice-1].first + (String)" was your choice.\n");
+  Serial.println("\n" + mix[input-1].first + (String)" was your input.\n");
 
   //여기서부터 이제 붓기 시작함
-  pour_juice(mix[choice-1].first);
+  pour_juice(mix[input-1].first);
 
   int score = recomm_rate();
-  mix[choice-1].second += score;
+  mix[input-1].second += score;
 }
 
 void third_menu() {
@@ -195,20 +196,20 @@ void third_menu() {
   }
 
   Serial.print("Your Choice : ");
-  int choice;
+  int input;
   
   while(1){
     tmp = keypad.getKey();
     if(tmp){
-      choice = int(tmp)-'0';
+      input = int(tmp)-'0';
       break;
     }
   }
   
-  Serial.println(choice);
+  Serial.println(input);
 
   //여기서부터 이제 붓기 시작함
-  pour_juice(good_mix[choice-1]);
+  pour_juice(good_mix[input-1]);
 
   Serial.println("**************************************\n");
 }
