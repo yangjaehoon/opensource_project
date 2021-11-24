@@ -47,16 +47,20 @@ int main_menu() {
   Serial.println("2 : Best Customization");
   Serial.println("3 : Get some Recommendation!");
   Serial.println("4 : Exit");
-  Serial.println("");
-
+  Serial.println("**************************************");
+  Serial.print("Choose the menu number: ");
+  
   char ret;  
   while(1){
     ret = keypad.getKey();
     if(ret)
-      break;
+    {
+       Serial.println(ret);
+       break;
+    }
   }
   
-  Serial.println("**************************************\n");
+ 
 
   return ret;
 }
