@@ -57,7 +57,7 @@ int main_menu() {
     if(ret)
       break;
   }
-
+  
   Serial.println("**************************************\n");
 
   return ret;
@@ -120,9 +120,8 @@ void first_menu() {
 
     recipe_now += (String)choice[bev-1] + " ";
 
-      Serial.println(choice[bev - 1]); //std::cout << choice[bev-1] << "를 얼만큼 따르시겠습니까?" << endl << endl;
-      Serial.println("How much would you like to follow?\n");
-      Serial.println("Please enter as many mL units as you want! : ");
+      Serial.println(choice[bev - 1]); 
+      Serial.println("Enter the amount of beverage for your Customization! (per 10mL) : ");
       
     while(1){
       ml = keypad.getKey();
@@ -136,7 +135,7 @@ void first_menu() {
   }
 
   Serial.println("------------Your Recipe-------------\n");
-  Serial.println(recipe_now);  //cout << recipe_now << endl << endl;
+  Serial.println(recipe_now);
   Serial.println("\n----------------------------------\n");
 
   pour_juice(recipe_now); //여기서부터 붓기 시작함
@@ -154,10 +153,10 @@ void second_menu() {
 
   sort(mix.begin(), mix.end(), cmp);
 
-  Serial.println("Recommended Mix\n\n");
+  Serial.println("Recommended Mix based on users' reviews.\n\n");
 
   for (int i = 0; i < mix.size(); i++)
-    Serial.println(i+1 + (String)"  |  " + mix[i].first + "\n"); //std::cout << i+1 << "  |  " << mix[i].first << "\n\n";
+    Serial.println(i+1 + (String)"  |  " + mix[i].first + "\n");
 
   Serial.println("What's your choice? : ");
 
@@ -171,8 +170,7 @@ void second_menu() {
     }
   }
 
-  Serial.println("\n" + mix[choice-1].first + (String)" was your choice.\n"); //std::cout << "\n" << mix[choice-1].first << " 조합을 선택하였습니다.\n";
-  Serial.println("Start Making...\n\n");
+  Serial.println("\n" + mix[choice-1].first + (String)" was your choice.\n");
 
   //여기서부터 이제 붓기 시작함
   pour_juice(mix[choice-1].first);
@@ -201,6 +199,8 @@ void third_menu() {
       break;
     }
   }
+  
+  Serial.println("Your choice was " + choice);
 
   //여기서부터 이제 붓기 시작함
   pour_juice(good_mix[choice-1]);
@@ -210,7 +210,7 @@ void third_menu() {
 
 void pour_juice(String str) {
   Serial.println("**************************************\n");
-  Serial.println(str + (String)" is in progress.....\n"); //std::cout << str << "의 조합을 만들고 있습니다......" << endl << endl;
+  Serial.println(str + (String)" is in progress.....\n"); 
   String temp;
   bool check_type = 1;  // 1이면 음료수, 0이면 ml로 하자
   
@@ -286,7 +286,7 @@ void loop() {
   char menu = main_menu();
   if(menu)
   {
-    Serial.println((String)"if enter  " + menu);
+  Serial.println("Let's go on to the menu " + menu);
     switch (menu) {
       case '1':
         first_menu(); // 첫 번째 메뉴 진입
@@ -299,7 +299,7 @@ void loop() {
         break;
       case '4':
         Serial.println("**************************************\n");
-        Serial.println("Program Ended.\n");
+        Serial.println("Program Ended.");
         Serial.println("**************************************\n");
         checkFinish = 1;
         break;
