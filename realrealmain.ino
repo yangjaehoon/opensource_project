@@ -41,26 +41,24 @@ vector<pair<String, int>> mix;
 
 char tmp;
 
-int main_menu() {
+char main_menu() {
   Serial.println("**************************************");
   Serial.println("1 : Customize your Drink!");
   Serial.println("2 : Best Customization");
   Serial.println("3 : Get some Recommendation!");
   Serial.println("4 : Exit");
-  Serial.println("**************************************");
-  Serial.print("Choose the menu number: ");
+  Serial.println("\nChoose the menu!");
   
   char ret;  
   while(1){
     ret = keypad.getKey();
     if(ret)
     {
-       Serial.println(ret);
        break;
     }
   }
   
- 
+  Serial.println("**************************************");
 
   return ret;
 }
