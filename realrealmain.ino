@@ -67,7 +67,7 @@ int recomm_rate() {
   Serial.println("Score range : (0~9)\n");
 
   int score;
-  Serial.println("Your Score : ");
+  Serial.print("Your Score : ");
   while(1){
     tmp = keypad.getKey();
     if(tmp){
@@ -75,8 +75,8 @@ int recomm_rate() {
       break;
     }
   }
-  
-  Serial.println("Score Uploaded.");
+  Serial.println(score);
+  Serial.println("\nScore Uploaded.");
   Serial.println("**************************************\n");
 
   return score;
@@ -102,7 +102,7 @@ void first_menu() {
         break;
     }
 
-    Serial.println();
+    Serial.println(input);
 
     if (input == '*') {
       Serial.println("Finish Customizing.");
@@ -118,8 +118,8 @@ void first_menu() {
 
     recipe_now += (String)choice[bev-1] + " ";
 
-      Serial.println(choice[bev - 1]); 
-      Serial.println("Enter the amount of beverage for your Customization! (per 10mL) : ");
+    Serial.println(choice[bev - 1]); 
+    Serial.print("Enter the amount of beverage for your Customization! (per 10mL) : ");
       
     while(1){
       ml = keypad.getKey();
@@ -127,8 +127,10 @@ void first_menu() {
         break;
     }
     
-    Serial.println("\n**************************************\n");
     String tmpR = (String)ml + (String)"0 ";
+    Serial.println(tmpR);
+    
+    Serial.println("\n**************************************\n");
     recipe_now += tmpR;
   }
 
@@ -190,7 +192,7 @@ void third_menu() {
     Serial.println(i+1 + (String)"  |  "+ good_mix[i] + "\n");//std::cout << i + 1 << "  |  " << good_mix[i] << endl << endl;
   }
 
-  Serial.println("What's your choice? : ");
+  Serial.print("Your Choice : ");
   int choice;
   
   while(1){
@@ -201,7 +203,7 @@ void third_menu() {
     }
   }
   
-  Serial.println("Your choice was " + choice);
+  Serial.println(choice);
 
   //여기서부터 이제 붓기 시작함
   pour_juice(good_mix[choice-1]);
