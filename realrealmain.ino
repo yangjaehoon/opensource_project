@@ -292,7 +292,6 @@ void loop() {
   char menu = main_menu();
   if(menu)
   {
-    Serial.println("Let's go on to the menu " + menu);
     switch (menu) {
       case '1':
         first_menu(); // 첫 번째 메뉴 진입
