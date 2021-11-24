@@ -49,9 +49,7 @@ int main_menu() {
   Serial.println("4 : Exit");
   Serial.println("");
 
-  char ret;
-  Serial.println("What's your choice? : ");
-  
+  char ret;  
   while(1){
     ret = keypad.getKey();
     if(ret)
@@ -104,7 +102,7 @@ void first_menu() {
         break;
     }
 
-    Serial.println("");
+    Serial.println();
 
     if (input == '*') {
       Serial.println("Finish Customizing.");
@@ -158,7 +156,7 @@ void second_menu() {
   for (int i = 0; i < mix.size(); i++)
     Serial.println(i+1 + (String)"  |  " + mix[i].first + "\n");
 
-  Serial.print("What's your choice? : ");
+  Serial.print("Your Choice : ");
 
   int choice;
 
@@ -170,6 +168,8 @@ void second_menu() {
       break;
     }
   }
+  
+  Serial.println(choice);
 
   Serial.println("\n" + mix[choice-1].first + (String)" was your choice.\n");
 
@@ -287,7 +287,7 @@ void loop() {
   char menu = main_menu();
   if(menu)
   {
-  Serial.println("Let's go on to the menu " + menu);
+    Serial.println("Let's go on to the menu " + menu);
     switch (menu) {
       case '1':
         first_menu(); // 첫 번째 메뉴 진입
