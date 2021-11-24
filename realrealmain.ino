@@ -56,11 +56,11 @@ char main_menu() {
     if(ret)
     {
        Serial.println(ret);
+       Serial.println("\n");
        break;
     }
   }
-  
-  Serial.println("**************************************");
+ 
 
   return ret;
 }
@@ -161,8 +161,12 @@ void second_menu() {
   Serial.println("Recommended Mix based on users' reviews.\n\n");
 
   for (int i = 0; i < mix.size(); i++)
-    Serial.println(i+1 + (String)"  |  " + mix[i].first + "\n");
-
+  {
+    //Serial.println(i+1 + (String)"  |  " + mix[i].first + "\n");
+    Serial.print(i+1);
+    Serial.print("   |   ");
+    Serial.println(mix[i].first);
+  }
   Serial.print("Your Choice : ");
 
   int input;
@@ -247,6 +251,7 @@ void pour_juice(String str) {
                         
                         digitalWrite(waterpumpin[bev_type], HIGH);
                         digitalWrite(waterpumpout[bev_type], LOW);
+                        ml = ml - 52;
                         delay(ml*10);
 
                         Serial.println(ml);
