@@ -47,7 +47,8 @@ char main_menu() {
   Serial.println("2 : Best Customization");
   Serial.println("3 : Get some Recommendation!");
   Serial.println("4 : Exit");
-  Serial.print("\nChoose the menu : ");
+  Serial.println("**************************************");
+  Serial.print("Choose the menu : ");
   
   char ret;  
   while(1){
@@ -91,12 +92,13 @@ void first_menu() {
   int bev;
   char ml;
 
-  Serial.println("**************************************\n");
 
   while (1) {
+    Serial.println("**************************************");
     Serial.println("Choose the Beverage!");
-    Serial.println("1. Fanta 2. Sprite 3. Coke 4. Powerade 5. Soju\n");
-    Serial.println("Press '*' to finish!\n");
+    Serial.println("1. Fanta 2. Sprite 3. Coke 4. Powerade 5. Soju");
+    Serial.println("Press '*' to finish!");
+    Serial.println("**************************************");
     Serial.print("Your Choice : ");
 
     while(1){
