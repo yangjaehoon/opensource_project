@@ -96,7 +96,7 @@ void first_menu() {
     Serial.println("Choose the Beverage!");
     Serial.println("1. Fanta 2. Sprite 3. Coke 4. Powerade 5. Soju\n");
     Serial.println("Press '*' to finish!\n");
-    Serial.println("Your Choice : ");
+    Serial.print("Your Choice : ");
 
     while(1){
       input = keypad.getKey();
@@ -158,7 +158,7 @@ void second_menu() {
   for (int i = 0; i < mix.size(); i++)
     Serial.println(i+1 + (String)"  |  " + mix[i].first + "\n");
 
-  Serial.println("What's your choice? : ");
+  Serial.print("What's your choice? : ");
 
   int choice;
 
@@ -166,6 +166,7 @@ void second_menu() {
     tmp = keypad.getKey();
     if(tmp){
       choice = int(tmp) - '0';
+      Serial.println(tmp);
       break;
     }
   }
