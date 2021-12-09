@@ -1,8 +1,5 @@
 # chang-web
 
-## Install
-Search Google
-
 ## Build
 ```
 $ docker build -t chang-web .
